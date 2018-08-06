@@ -6,18 +6,16 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Store {
     private Scanner scanner = new Scanner(System.in);
     private List<Product> productList = new ArrayList<>();
     private List<Order> orderList = new ArrayList<>();
+    static private final List<String> animalProducts = Arrays.asList("milk", "eggs", "cheese", "yogurt", "cream");
+    static private final List<String> vegetalProducts = Arrays.asList("carrot", "tomato", "cucumber", "peach", "apple");
 
-
-    class Order {
+    static class Order {
         /**
          * class Order is instantiated each time an order is made. It is populated with relevant information about
          * transaction, through constructor.
@@ -132,7 +130,8 @@ public class Store {
             /**
              * If all inputs are correct, add a new order to the orderList array.
              */
-            orderList.add(new Store.Order(dateFormat.format(date), productList.get(productID - 1).getName(), productQuantity, productList.get(productID - 1).getPrice()));
+            orderList.add(new Store.Order(dateFormat.format(date), productList.get(productID - 1).getName(), productQuantity,
+                    productList.get(productID - 1).getPrice()));
             System.out.println("\nItem " + productList.get(productID - 1).getName() + " sold");
 
             /**
@@ -167,15 +166,15 @@ public class Store {
         }
         if (action == 1) {
             product = new Animal();
-            System.out.println("Following products can be added: " + product.getAnimalProducts().toString());
+            System.out.println("Following products can be added: " + animalProducts.toString());
         } else {
             product = new Vegetal();
-            System.out.println("Following products can be added: " + product.getVegetalProducts().toString());
+            System.out.println("Following products can be added: " + vegetalProducts.toString());
 
         }
         System.out.println("Enter name:");
         String opt = scanner.next().toLowerCase();
-        while (!(product.getAnimalProducts().contains(opt) || product.getVegetalProducts().contains(opt))) {
+        while (!(animalProducts.contains(opt) || vegetalProducts.contains(opt))) {
             System.err.println("Invalid product! Enter again: ");
             opt = scanner.next().toLowerCase();
         }
@@ -220,12 +219,15 @@ public class Store {
         if (action == 1) {
             ((Animal) product).setStorageTemperature(askInputDouble("Enter storage temperature:"));
         } else {
-            System.out.println("Enter the vitamins it contains:");
-            ((Vegetal) product).setVitamins(scanner.next());
+            System.out.println("Following vitamins can be entered: " + ((Vegetal) product).getVegetalVitaminList());
+            System.out.println("Please enter the appropriate vitamins for " + product.getName());
+            String vitamins = scanner.next();
+            ((Vegetal) product).setVitamins(vitamins.toUpperCase());
+
         }
 
         productList.add(product);
-        System.out.println("\n" + product.getName() + " successful added !\n");
+        System.out.println(product.getName() + " successful added !\n");
     }
 
 

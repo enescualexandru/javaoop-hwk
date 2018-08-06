@@ -11,29 +11,6 @@ public class Product {
     private String validity;
     private int weight;
     private String name;
-    private List<String> animalProducts = new ArrayList<>();
-    private List<String> vegetalProducts = new ArrayList<>();
-
-    public Product() {
-        this.animalProducts.add("milk");
-        this.animalProducts.add("eggs");
-        this.animalProducts.add("cheese");
-        this.animalProducts.add("yogurt");
-        this.animalProducts.add("cream");
-        this.vegetalProducts.add("carrot");
-        this.vegetalProducts.add("tomato");
-        this.vegetalProducts.add("cucumber");
-        this.vegetalProducts.add("peach");
-        this.vegetalProducts.add("apple");
-    }
-
-    public List<String> getAnimalProducts() {
-        return animalProducts;
-    }
-
-    public List<String> getVegetalProducts() {
-        return vegetalProducts;
-    }
 
     public double getPrice() {
         return price;
